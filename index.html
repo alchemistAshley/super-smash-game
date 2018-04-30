@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Super Smash Game</title>
+        <meta charset="UTF-8">
+
+        <!-- <link to Google Fonts> -->
+        <!-- <link to CSS Reset -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- <link to CSS> -->
+        <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+        <h1>
+            Battle Royale 
+        </h1>
+       
+        <!-- Player Card should float left and display info -->
+        <div class="card float-left" style="width: 10rem;">
+            <div class="card-header character-info">
+              <span id="player-name">Player Name</span>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span id="player-power">Player Power</span>
+                </li>
+                <li class="list-group-item">
+                    <span id="player-hp">Player HP</span>
+                 </li>
+                <li class="list-group-item">
+                  <span id="player-attack-power">Player Attack Power</span>
+                </li>
+            </ul>
+        </div> 
+       
+       <!-- Opponent Card should float right and display info -->
+        <div class="card float-right" style="width: 10rem;">
+            <div class="card-header character-info">
+              <span id="opponent-name">Opponent Name</span>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span id="player-power">Player Power</span>
+                </li>
+                <li class="list-group-item">
+                  <span id="opponent-hp">Opponent HP</span>
+                </li>
+              <li class="list-group-item">
+                  <span id="opponent-attack-power">Opponent Attack Power</span>
+              </li>
+            </ul>
+        </div>
+
+        <div class="container battle-royale">
+            <div id="player-container">
+                <img id="player-image">
+                <figure class="battle-station"></figure>
+            </div>
+            <button type="button" class="btn btn-outline-dark mx-auto" id="attackButton">Attack</button>
+            <div id="opponent-container">
+                <img id="opponent-image">
+                <figure class="battle-station"></figure>
+            </div>
+        </div>
+
+        <div class="character-selection">
+            <p id="prompt">Choose your character:/Choose your opponet/Choose your next opponent/choose your final opponent</p>
+            <div class="container row">
+
+                <div class="card col-md-2" id="aang">
+                    <img class="card-img-top" src="assets/images/Aang.png" alt="avatar aang">
+                    <div class="card-body">
+                        <h5 class="card-title" id="aangName">Aang</h5>
+                        <span class="card-text" id="aangPower">Character's Power</span>
+                        <p class="card-text" id="aangHp">Character's HP</p>
+                        <p class="card-text" id="aangAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="aangSelect">Select Character</a>
+                    </div>
+                </div>
+
+                <div class="card col-md-2" id="bubblegum">
+                    <img class="card-img-top" src="assets/images/bubblegum.jpg" alt="princess bubblegum">
+                    <div class="card-body">
+                        <h5 class="card-title" id="bubblegumName">Character Name</h5>
+                        <span class="card-text" id="bubblegumPower">Character's Power</span>
+                        <p class="card-text" id="bubblegumHp">Character's HP</p>
+                        <p class="card-text" id="bubblegumAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="bubblegumSelect">Select Character</a>
+                    </div>
+                </div>
+
+                <div class="card col-md-2" id="dandy">
+                    <img class="card-img-top" src="assets/images/dandy.png" alt="space dandy">
+                    <div class="card-body">
+                        <h5 class="card-title" id="dandyName">Character Name</h5>
+                        <span class="card-text" id="dandyPower">Character's Power</span>
+                        <p class="card-text" id="dandyHp">Character's HP</p>
+                        <p class="card-text" id="dandyAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="dandySelect">Select Character</a>
+                    </div>
+                </div>
+
+                <div class="card col-md-2" id="garnet">
+                    <img class="card-img-top" src="assets/images/garnet.png" alt="garnet">
+                    <div class="card-body">
+                        <h5 class="card-title" id="garnetName">Character Name</h5>
+                        <span class="card-text" id="garnetPower">Character's Power</span>
+                        <p class="card-text" id="garnetHp">Character's HP</p>
+                        <p class="card-text" id="garnetAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="garnetSelect">Select Character</a>
+                    </div>
+                </div>
+            
+                <div class="card col-md-2" id="mononoke">
+                    <img class="card-img-top" src="assets/images/mononoke.jpg" alt="princess mononoke">
+                    <div class="card-body">
+                        <h5 class="card-title" id="mononokeName">Character Name</h5>
+                        <span class="card-text" id="mononokePower">Character's Power</span>
+                        <p class="card-text" id="mononokeHp">Character's HP</p>
+                        <p class="card-text" id="mononokeAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="mononokeSelect">Select Character</a>
+                    </div>
+                </div>
+
+                <div class="card col-md-2" id="rick">
+                    <img class="card-img-top" src="assets/images/rick.png" alt="rick sanchez">
+                    <div class="card-body">
+                        <h5 class="card-title" id="rickName">Character Name</h5>
+                        <span class="card-text" id="rickPower">Character's Power</span>
+                        <p class="card-text" id="rickHp">Character's HP</p>
+                        <p class="card-text" id="rickAttackPower">Character's Attack Power</p>
+                        <a href="#" class="btn btn-primary" id="rickSelect">Select Character</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+    <script src="assets/javascript/game.js"></script>
+    </body>
+
+</html>
