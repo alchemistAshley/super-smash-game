@@ -71,6 +71,8 @@ var isPlayerSelected = false;
 var playerSelected; 
 var opponentSelected;
 
+$("#attackButton").attr("disabled", true);
+
 //character cards start new
 // select player function
     // player is chosen and "blacks out" from options list, image goes to player battle station, player info fills in player card
@@ -128,35 +130,52 @@ function selectCharacters(characterId) {
                 // card info fill
                 $("#player-name").text(characters[i].name);
                 $("#player-power").text(characters[i].power);
-                $("#player-hp").text(characters[i].hp);
-                $("#player-attack-power").text(characters[i]["attack-power"]);
+                $("#player-hp").text("HP: " + characters[i].hp);
+                $("#player-attack-power").text("Attack Power: " + characters[i]["attack-power"]);
                 // set image on battle station
                 $("#player-image").attr('src', characters[i].img);
+                $("#player-image").fadeIn();
             } 
         }
 
     } else {
         for (var i = 0; i < characters.length; i++) {
             if(characters[i].id == characterId) {
-                opponentSelected = character[i];
+                opponentSelected = characters[i];
                 // opaque
                 $("#" + characters[i].id).css('opacity', '0.5');
                 // card info fill
                 $("#opponent-name").text(characters[i].name);
                 $("#opponent-power").text(characters[i].power);
-                $("#opponent-hp").text(characters[i].hp);
-                $("#opponent-attack-power").text(characters[i]["attack-power"]);
+                $("#opponent-hp").text("HP: " + characters[i].hp);
+                $("#opponent-attack-power").text("Attack Power: " + characters[i]["attack-power"]);
                 // set image on battle station
                 $("#opponent-image").attr('src', characters[i].img);
+                $("#player-image").fadeIn();
+
+                $("#attackButton").attr("disabled", false);
+                $("#character-selection").css('opacity', '0.2');
             }
         }
     }
 }
 
-// $("#attackButton").on("click", function() {
-//     opponentSelected.hp -= playerSelected["attack-power"];
+$("#attackButton").on("click", function() {
+    opponentSelected.hp -= playerSelected["attack-power"];
+    $("#opponent-hp").text("HP: " + opponentSelected.hp);
+    playerSelected["attack-power"] += playerSelected["base-attack-power"];
+    $("#player-attack-power").text("Attack Power: " + playerSelected["attack-power"]);
+    playerSelected.hp -= opponentSelected["counter-attack-power"];
+    $("#player-hp").text("HP: " + playerSelected.hp);
+    
+    if (opponentSelected.hp <= 0) {
+        $("#attackButton").attr("disabled", true);
+        $("#prompt").text("Choose your next opponent:");
+        $("#character-selection").css('opacity', '1');
+        $("#opponent-image").fadeOut();
+    }
+})
 
-// })
-
+// continue through opponents, reset opponent values, end game/restart, design
 
 
