@@ -5,7 +5,7 @@ var aang = {
     "name": "Aang",
     "power": "Master of All Elements",
     "img" : "assets/images/Aang.png",
-    "hp": 100,
+    "hp": 200,
     "base-attack-power": 10,
     "attack-power": 10, //this will increase with every attack
     "counter-attack-power": 10 //this will remain the same
@@ -70,6 +70,7 @@ var characters = [aang, bubblegum, dandy, garnet, mononoke, rick];
 var isPlayerSelected = false;
 var playerSelected; 
 var opponentSelected;
+var opponentCount = 0;
 
 $("#attackButton").attr("disabled", true);
 
@@ -119,6 +120,8 @@ $("#rickSelect").on("click", function() {
     selectCharacters("rick");
 });
 
+$("#prompt").text("Choose your player:");
+
 function selectCharacters(characterId) {
     if (isPlayerSelected == false) {
         for (var i = 0; i < characters.length; i++) {
@@ -134,7 +137,8 @@ function selectCharacters(characterId) {
                 $("#player-attack-power").text("Attack Power: " + characters[i]["attack-power"]);
                 // set image on battle station
                 $("#player-image").attr('src', characters[i].img);
-                $("#player-image").fadeIn();
+                $("#player-image").hide().fadeIn();
+                $("#prompt").show().text("Choose your opponent:");
             } 
         }
 
@@ -151,31 +155,54 @@ function selectCharacters(characterId) {
                 $("#opponent-attack-power").text("Attack Power: " + characters[i]["attack-power"]);
                 // set image on battle station
                 $("#opponent-image").attr('src', characters[i].img);
-                $("#player-image").fadeIn();
-
+                $("#opponent-image").hide().fadeIn();
                 $("#attackButton").attr("disabled", false);
                 $("#character-selection").css('opacity', '0.2');
+                $("#prompt").hide().text("Choose your opponent:");
             }
         }
     }
 }
 
+function gameOver() {
+    $("#prompt").text("Game Over!");
+    $("#attackButton").attr("disabled", true);
+    $("#character-selection").css('opacity', '0');
+}
+
 $("#attackButton").on("click", function() {
     opponentSelected.hp -= playerSelected["attack-power"];
-    $("#opponent-hp").text("HP: " + opponentSelected.hp);
     playerSelected["attack-power"] += playerSelected["base-attack-power"];
-    $("#player-attack-power").text("Attack Power: " + playerSelected["attack-power"]);
     playerSelected.hp -= opponentSelected["counter-attack-power"];
-    $("#player-hp").text("HP: " + playerSelected.hp);
+    
     
     if (opponentSelected.hp <= 0) {
+        opponentCount++;
+        opponentSelected.hp = 0;
         $("#attackButton").attr("disabled", true);
-        $("#prompt").text("Choose your next opponent:");
         $("#character-selection").css('opacity', '1');
         $("#opponent-image").fadeOut();
+        $("#prompt").show().text("Choose your next opponent:");
+    } 
+
+    $("#opponent-hp").text("HP: " + opponentSelected.hp);
+    $("#player-attack-power").text("Attack Power: " + playerSelected["attack-power"]);
+    $("#player-hp").text("HP: " + playerSelected.hp);
+
+    if (playerSelected.hp <= 0) {
+        $("#player-image").fadeOut();
+        gameOver();
     }
-})
+
+    if (opponentCount == 5) {
+        gameOver();
+    }
+
+});
 
 // continue through opponents, reset opponent values, end game/restart, design
-
-
+// boolean on each object then for loop for each character if they have been selected 
+// then change to true for all characters
+// color/opacity changes depending on if player, if opponent selected and opponent defeated using add class in jquery
+// if player is defeated, you lost- game over. if all other opponents defeated you won- game over. 
+// counter var if counter = 5 (all other opponents) have been defeated, game over

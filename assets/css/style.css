@@ -1,0 +1,23 @@
+.battleground {
+    background: url(https://orig00.deviantart.net/b0f5/f/2012/343/0/6/wip_parallax_background_by_stormandy-d5n5tr6.png);
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  }
+  
+
+card {
+    background-color: rgba(245, 245, 245, 0.4);
+}
+
+.navbar {
+    font-family: 'Fredoka One', cursive;
+}
+
+
+
