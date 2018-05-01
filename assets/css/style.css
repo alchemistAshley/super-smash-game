@@ -1,23 +1,70 @@
-.battleground {
-    background: url(https://orig00.deviantart.net/b0f5/f/2012/343/0/6/wip_parallax_background_by_stormandy-d5n5tr6.png);
-}
-
-.vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
-  
-    display: flex;
-    align-items: center;
-  }
-  
-
-card {
-    background-color: rgba(245, 245, 245, 0.4);
-}
 
 .navbar {
     font-family: 'Fredoka One', cursive;
+    text-align: center;
+    color: #303154;
 }
 
+body {
+    color: #303154;
+    margin-top: 25px;
+    background: url(https://orig00.deviantart.net/b0f5/f/2012/343/0/6/wip_parallax_background_by_stormandy-d5n5tr6.png);
+    background-size: cover;
+}   
 
+#battleground {
+    margin-top: 200px auto;
+}
+
+.battle-image {
+    max-height: 400px;
+}
+
+#player-image {
+    float: left;
+}
+
+#opponent-image {
+    float: right;
+}
+
+#attackButton {
+    margin: 150px 20px 0px 20px;
+}
+
+.card {
+    background-color: rgba(245, 245, 245, 0.8);
+    border-color: #303154;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.card-img-top {
+    height: 200px;
+    width: auto;
+}
+
+.list-group-item {
+    background-color: rgba(245, 245, 245, 0.6);
+}
+
+.prompt {
+    font-size: 24px;
+    color: #303154;
+}
+
+.btn {
+    background-color: #303154;
+    color: #f5f5f5;
+}
+
+h1 {
+    display: inline-block;
+}
+
+#gone {
+    visibility: hidden;
+}
 

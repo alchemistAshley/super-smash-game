@@ -3,23 +3,23 @@ console.log("hello world");
 var aang = {
     "id": "aang",
     "name": "Aang",
-    "power": "Master of All Elements",
+    "power": "Master of Elements",
     "img" : "assets/images/Aang.png",
     "hp": 200,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
+    "base-attack-power": 9,
+    "attack-power": 9, //this will increase with every attack
+    "counter-attack-power": 15 //this will remain the same
 };
 
 var bubblegum = {
     "id": "bubblegum",
     "name": "Princess Bubblegum",
-    "power": "Scientist & Beloved Benevolent Ruler",
-    "img" : "assets/images/bubblegum.jpg",
-    "hp": 100,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
+    "power": "Beloved Scientist",
+    "img" : "assets/images/bubblegum.png",
+    "hp": 190,
+    "base-attack-power": 6,
+    "attack-power": 6, //this will increase with every attack
+    "counter-attack-power": 16 //this will remain the same
 };
 
 var dandy = {
@@ -27,32 +27,31 @@ var dandy = {
     "name": "Space Dandy",
     "power": "Luck & Charm",
     "img" : "assets/images/dandy.png",
-    "hp": 100,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
+    "hp": 215,
+    "base-attack-power": 15,
+    "attack-power": 15, //this will increase with every attack
+    "counter-attack-power": 20 //this will remain the same
 };
 
 var garnet = {
     "id": "garnet",
     "name": "Garnet",
-    "power": "Strength & Future Vision",
+    "power": "Future Vision",
     "img" : "assets/images/garnet.png",
-    "hp": 100,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
-};
-
+    "hp": 220,
+    "base-attack-power": 11,
+    "attack-power": 11, //this will increase with every attack
+    "counter-attack-power": 22 //this will remain the same
+}
 var mononoke = {
     "id": "mononoke",
     "name": "Princess Mononoke",
-    "power": "Goddess of Nature & Animals",
-    "img" : "assets/images/mononoke.jpg",
-    "hp": 100,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
+    "power": "Nature & Animals",
+    "img" : "assets/images/mononoke.png",
+    "hp": 180,
+    "base-attack-power": 8,
+    "attack-power": 8, //this will increase with every attack
+    "counter-attack-power": 18 //this will remain the same
 };
  
 var rick = {
@@ -60,10 +59,10 @@ var rick = {
     "name": "Rick Sanchez",
     "power": "Mad Scientist",
     "img" : "assets/images/rick.png",
-    "hp": 100,
-    "base-attack-power": 10,
-    "attack-power": 10, //this will increase with every attack
-    "counter-attack-power": 10 //this will remain the same
+    "hp": 205,
+    "base-attack-power": 12,
+    "attack-power": 12, //this will increase with every attack
+    "counter-attack-power": 25 //this will remain the same
 };
 
 var characters = [aang, bubblegum, dandy, garnet, mononoke, rick];
@@ -72,24 +71,14 @@ var playerSelected;
 var opponentSelected;
 var opponentCount = 0;
 
+var startAudio = new Audio("assets/images/jazzyfunkmusic.mp3");
+
+$(document).ready(function() {
+    startAudio.play(); 
+})
+
 $("#attackButton").attr("disabled", true);
-
-//character cards start new
-// select player function
-    // player is chosen and "blacks out" from options list, image goes to player battle station, player info fills in player card
-// select opponent function
-    // opponent is chosen and "blacks out" from options list, image goes to opponent battle station, opponent info fills in opp. card
-//  battle royale function
-    //press attack button- with each attack, increase base attack power and decrease opponents hp
-    //opponent attacks back- decrease players hp by counter-attack-power
-    //continues until opponent is out of hp
-    
-    //once first opponent is defeated, select next opponent
-    //battle royale function
-
-    //once second opponent is defeated, select final opponent
-    //battle royale function
-    //game over if player is out of hp or final(3rd) opponent is defeated
+$("#attackButton").hide();
 
 // on page load, characters displayed at bottom
 for (var i = 0; i < characters.length; i++){
@@ -98,6 +87,7 @@ for (var i = 0; i < characters.length; i++){
     $("#" + characters[i].id + "Power").text(characters[i].power);
     $("#" + characters[i].id + "Hp").text("HP: " + characters[i].hp);
     $("#" + characters[i].id + "AttackPower").text("Attack Power: "+ characters[i]["attack-power"]);
+    $("#" + characters[i].id + "CounterAttackPower").text("Counter Attack: "+ characters[i]["counter-attack-power"]);
 }
 
 
@@ -157,7 +147,8 @@ function selectCharacters(characterId) {
                 $("#opponent-image").attr('src', characters[i].img);
                 $("#opponent-image").hide().fadeIn();
                 $("#attackButton").attr("disabled", false);
-                $("#character-selection").css('opacity', '0.2');
+                $("#attackButton").show();
+                $("#character-selection").hide();
                 $("#prompt").hide().text("Choose your opponent:");
             }
         }
@@ -165,9 +156,8 @@ function selectCharacters(characterId) {
 }
 
 function gameOver() {
-    $("#prompt").text("Game Over!");
     $("#attackButton").attr("disabled", true);
-    $("#character-selection").css('opacity', '0');
+    $("#character-selection").css('display', 'none');
 }
 
 $("#attackButton").on("click", function() {
@@ -180,7 +170,7 @@ $("#attackButton").on("click", function() {
         opponentCount++;
         opponentSelected.hp = 0;
         $("#attackButton").attr("disabled", true);
-        $("#character-selection").css('opacity', '1');
+        $("#character-selection").show();
         $("#opponent-image").fadeOut();
         $("#prompt").show().text("Choose your next opponent:");
     } 
@@ -190,19 +180,14 @@ $("#attackButton").on("click", function() {
     $("#player-hp").text("HP: " + playerSelected.hp);
 
     if (playerSelected.hp <= 0) {
+        $("#prompt").text("Game Over... You Lost!");
         $("#player-image").fadeOut();
         gameOver();
     }
 
     if (opponentCount == 5) {
+        $("#prompt").text("Game Over... You Won!");
         gameOver();
     }
 
 });
-
-// continue through opponents, reset opponent values, end game/restart, design
-// boolean on each object then for loop for each character if they have been selected 
-// then change to true for all characters
-// color/opacity changes depending on if player, if opponent selected and opponent defeated using add class in jquery
-// if player is defeated, you lost- game over. if all other opponents defeated you won- game over. 
-// counter var if counter = 5 (all other opponents) have been defeated, game over
