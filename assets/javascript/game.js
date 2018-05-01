@@ -36,7 +36,7 @@ var dandy = {
 var garnet = {
     "id": "garnet",
     "name": "Garnet",
-    "power": "Future Vision",
+    "power": "Strength & Future Vision",
     "img" : "assets/images/garnet.png",
     "hp": 220,
     "base-attack-power": 11,
@@ -79,6 +79,7 @@ $(document).ready(function() {
 
 $("#attackButton").attr("disabled", true);
 $("#attackButton").hide();
+
 
 // on page load, characters displayed at bottom
 for (var i = 0; i < characters.length; i++){
